@@ -1,0 +1,7 @@
+node_modules
+dist
+.vscode
+.idea
+*.css.map
+*.js.map
+nodemon.json
