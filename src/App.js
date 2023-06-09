@@ -26,39 +26,41 @@ const TodoApp = () => {
   };
 
   return (
-    <div className="container">
-      <h1 className="title">Todo App</h1>
-      <div className="field has-addons">
-        <div className="control">
-          <input
-            className="input"
-            type="text"
-            placeholder="Enter a new todo"
-            value={inputValue}
-            onChange={handleInputChange}
-          />
+    <div className="section">
+      <div className="container is-max-desktop">
+        <h1 className="title is-1">Todo App</h1>
+        <div className="field has-addons">
+          <div className="control is-expanded">
+            <input
+              className="input"
+              type="text"
+              placeholder="Enter a new todo"
+              value={inputValue}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="control">
+            <button className="button is-primary" onClick={handleAddTodo}>
+              Add
+            </button>
+          </div>
         </div>
-        <div className="control">
-          <button className="button is-primary" onClick={handleAddTodo}>
-            Add
-          </button>
-        </div>
-      </div>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id} className="notification">
-            <div className="level">
-              <div className="level-left">{todo.text}</div>
-              <div className="level-right">
-                <button
-                  className="delete"
-                  onClick={() => handleRemoveTodo(todo.id)}
-                />
+        <div >
+          {todos.map((todo) => (
+            <div key={todo.id} className="notification my-2">
+              <div className="columns is-mobile is-vcentered">
+                <div className="column">{todo.text}</div>
+                <div className="column is-narrow">
+                  <button
+                    className="delete is-medium"
+                    onClick={() => handleRemoveTodo(todo.id)}
+                  />
+                </div>
               </div>
             </div>
-          </li>
-        ))}
-      </ul>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
