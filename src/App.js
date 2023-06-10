@@ -1,5 +1,7 @@
 import "bulma/css/bulma.css";
+import "./index.css";
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const TodoApp = () => {
   const [todos, setTodos] = useState([]);
@@ -12,8 +14,9 @@ const TodoApp = () => {
   const handleAddTodo = () => {
     if (inputValue) {
       const newTodo = {
-        id: todos.length + 1,
+        id: uuidv4(),
         text: inputValue,
+        isActive: true,
       };
       setTodos([...todos, newTodo]);
       setInputValue("");
@@ -22,6 +25,20 @@ const TodoApp = () => {
 
   const handleRemoveTodo = (id) => {
     const updatedTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(updatedTodos);
+  };
+
+  const handleToggleTodoState = (id) => {
+    const updatedTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        return {
+          ...todo,
+          isActive: !todo.isActive,
+        };
+      }
+
+      return todo;
+    });
     setTodos(updatedTodos);
   };
 
@@ -45,11 +62,18 @@ const TodoApp = () => {
             </button>
           </div>
         </div>
-        <div >
+        <div>
           {todos.map((todo) => (
             <div key={todo.id} className="notification my-2">
               <div className="columns is-mobile is-vcentered">
-                <div className="column">{todo.text}</div>
+                <div
+                  className={
+                    todo.isActive ? "column pointer" : "column pointer strike"
+                  }
+                  onClick={() => handleToggleTodoState(todo.id)}
+                >
+                  {todo.text}
+                </div>
                 <div className="column is-narrow">
                   <button
                     className="delete is-medium"
