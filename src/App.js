@@ -29,16 +29,9 @@ const TodoApp = () => {
   };
 
   const handleToggleTodoState = (id) => {
-    const updatedTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        return {
-          ...todo,
-          isActive: !todo.isActive,
-        };
-      }
-
-      return todo;
-    });
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, isActive: !todo.isActive } : todo
+    );
     setTodos(updatedTodos);
   };
 
@@ -67,9 +60,7 @@ const TodoApp = () => {
             <div key={todo.id} className="notification my-2">
               <div className="columns is-mobile is-vcentered">
                 <div
-                  className={
-                    todo.isActive ? "column pointer" : "column pointer strike"
-                  }
+                  className={`column pointer${todo.isActive ? "" : " strike"}`}
                   onClick={() => handleToggleTodoState(todo.id)}
                 >
                   {todo.text}

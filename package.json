@@ -1,5 +1,5 @@
 {
-  "name": "minimal-react-starter",
+  "name": "react-todo-app",
   "version": "1.0.0",
   "description": "react + webpack",
   "main": "index.js",
