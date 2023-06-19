@@ -20,6 +20,12 @@ const TodoForm = ({ handleAddTodo }) => {
     }
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleAddClick();
+    }
+  };
+
   return (
     <div className="field has-addons">
       <div className="control is-expanded">
@@ -29,6 +35,7 @@ const TodoForm = ({ handleAddTodo }) => {
           placeholder="Enter a new todo"
           value={inputValue}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
         />
       </div>
       <div className="control">
