@@ -16,11 +16,16 @@ const TodoApp = () => {
   };
 
   const handleToggleTodoState = (id) => {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
+    setTodos((prevTodos) => {
+      const updatedTodos = prevTodos.map((todo) =>
         todo.id === id ? { ...todo, isActive: !todo.isActive } : todo
-      )
-    );
+      );
+
+      const activeTodos = updatedTodos.filter((todo) => todo.isActive);
+      const inactiveTodos = updatedTodos.filter((todo) => !todo.isActive);
+
+      return [...activeTodos, ...inactiveTodos];
+    });
   };
 
   return (
